@@ -181,6 +181,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`JOGADORES` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+source createView.sql;  -- Manualmente inserido xD. Para facilitar as queries
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

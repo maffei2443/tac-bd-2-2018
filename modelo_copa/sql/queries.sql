@@ -1,4 +1,5 @@
--- + Todas as copas de 2010 a 2030 que tiveram mais de 2 jogos com mais de 5 
+-- Q1
+-- Todas as copas de 2010 a 2030 que tiveram mais de 2 jogos com mais de 5 
 -- gols cada, bem como como quantos gols houveram nelas.
 
 SELECT * FROM (
@@ -12,9 +13,9 @@ SELECT * FROM (
 WHERE A.COPA_id BETWEEN 2010 and 2030;
 
 
-
--- + Todos os jogadores nascidos depois de 1900 que participaram de 3+ copas ou foram
- -- tecnicos ou que nasceram na cidade sede da copa em questão.
+-- Q2
+-- Todos os jogadores nascidos depois de 1900-01-01 que participaram de 3+ copas ou foram
+-- tecnicos ou que nasceram na cidade sede da copa em questão.
 SELECT * FROM (
 	SELECT * FROM (
 		SELECT PE.id, PE.nome FROM PESSOA PE, PAIS PA, SEDE S
@@ -39,33 +40,21 @@ SELECT * FROM (
 
 
 
-
--- + Todas as equipes cujo pais de origem ainda NAO sediou copa alguma.
-	-- seleciona paises que JAH sediaram
-
-SELECT distinct P.id FROM PAIS P, SEDE S WHERE P.id = S.pais_id;
--- Encontre todos os paises com o contador de copas sediadas em zero E
-select distinct id from PAIS
-	WHERE id not in (
-		SELECT distinct S.pais_id from SEDE S
-	);
+-- Q3
+-- Todos os paises que já participaram de copas do mundo E nao foram sede nenhuma vez.
+SELECT * FROM PLAYED natural join NOTSEDE;
 
 
-select distinct id from PAIS
-	WHERE id not in (
-		SELECT distinct S.pais_id from SEDE S
-	);
--- Deu trabalho pra caramba fazer essa acima!!! Fui dormir 3:40....
-
--- Encontre todos os países que participaram de ao menos uma copa.
-
-SELECT distinct P.id from PAIS P, EQUIPE E
-	WHERE P.id = E.pais_id
-	GROUP BY P.id;
-
--- Encontra todos os paises
-
-select distinct id from PAIS;
+-- Q4
+SELECT id, nome from (
+	(SELECT DISTINCT PE.nome ,PE.id FROM PESSOA PE, PAIS PA
+	WHERE PE.pais in (
+		SELECT id from FOISEDE
+	)) M
+	natural join
+	(SELECT id, nome from PENAEQMAIS2GOLS) MM
+)
+ORDER BY id;
 
 
 
