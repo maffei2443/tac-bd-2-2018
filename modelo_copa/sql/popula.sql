@@ -57,7 +57,8 @@ INSERT INTO JOGO (data, hora, estadio, eq1, eq2, gol1, gol2, COPA_id) VALUES ("2
 INSERT INTO JOGO (data, hora, estadio, eq1, eq2, gol1, gol2, COPA_id) VALUES ("2018-11-03", "11:11:11", "generico1", 3, 4, 1, 7, 2018);
 INSERT INTO JOGO (data, hora, estadio, eq1, eq2, gol1, gol2, COPA_id) VALUES ("2018-11-04", "11:11:11", "generico1", 3, 1, 1, 7, 2018);
 INSERT INTO JOGO (data, hora, estadio, eq1, eq2, gol1, gol2, COPA_id) VALUES ("2018-11-05", "11:11:11", "generico1", 3, 2, 1, 7, 2018);
-INSERT INTO JOGO (data, hora, estadio, eq1, eq2, gol1, gol2, COPA_id) VALUES ("2018-12-11", "11:11:11", "generico1", 1, 4, 1, 1, 2027);
 INSERT INTO JOGO (data, hora, estadio, eq1, eq2, gol1, gol2, COPA_id) VALUES ("2018-11-21", "11:11:11", "generico1", 4, 5, 3, 1, 2018);
+INSERT INTO JOGO (data, hora, estadio, eq1, eq2, gol1, gol2, COPA_id) VALUES ("2018-12-11", "11:11:11", "generico1", 1, 4, 4, 1, 2027);
+INSERT INTO JOGO (data, hora, estadio, eq1, eq2, gol1, gol2, COPA_id) VALUES ("2018-12-10", "11:11:11", "generico7", 2, 4, 5, 1, 2027);
 INSERT INTO JOGO (data, hora, estadio, eq1, eq2, gol1, gol2, COPA_id) VALUES ("2018-11-22", "11:11:11", "generico1", 3, 5, 6, 6, 2040);
 
