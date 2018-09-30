@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+  pgadm4:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_DEFAULT_EMAIL: root
+    ports:
+      - 61886:80

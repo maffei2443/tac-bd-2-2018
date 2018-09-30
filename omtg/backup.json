@@ -1,0 +1,334 @@
+{
+    "omtg-conceptual-schema": {
+        "@xsi:noNamespaceSchemaLocation": "omtg-schema-template.xsd", 
+        "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance", 
+        "classes": {
+            "class": [
+                {
+                    "name": "COPA", 
+                    "top": "210", 
+                    "left": "460", 
+                    "type": "conventional", 
+                    "attributes": {
+                        "attribute": [
+                            {
+                                "name": "id", 
+                                "type": "INTEGER", 
+                                "key": "true"
+                            }, 
+                            {
+                                "name": "inicio", 
+                                "type": "DATE", 
+                                "not-null": "true"
+                            }, 
+                            {
+                                "name": "fim", 
+                                "type": "DATE", 
+                                "not-null": "true"
+                            }, 
+                            {
+                                "name": "abertura", 
+                                "type": "VARCHAR", 
+                                "length": "50", 
+                                "not-null": "true"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "name": "SEDE", 
+                    "top": "0", 
+                    "left": "180", 
+                    "type": "conventional", 
+                    "attributes": {
+                        "attribute": [
+                            {
+                                "name": "pais_id", 
+                                "type": "VARCHAR", 
+                                "key": "true", 
+                                "length": "2"
+                            }, 
+                            {
+                                "name": "copa", 
+                                "type": "INTEGER", 
+                                "key": "true"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "name": "PAIS", 
+                    "top": "190", 
+                    "left": "20", 
+                    "type": "polygon", 
+                    "attributes": {
+                        "attribute": [
+                            {
+                                "name": "id", 
+                                "type": "VARCHAR", 
+                                "key": "true", 
+                                "length": "2"
+                            }, 
+                            {
+                                "name": "nome", 
+                                "type": "VARCHAR", 
+                                "key": "true", 
+                                "length": "50"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "name": "PESSOA", 
+                    "top": "520", 
+                    "left": "40", 
+                    "type": "conventional", 
+                    "attributes": {
+                        "attribute": [
+                            {
+                                "name": "id", 
+                                "type": "INTEGER", 
+                                "key": "true"
+                            }, 
+                            {
+                                "name": "pais", 
+                                "type": "VARCHAR", 
+                                "length": "2"
+                            }, 
+                            {
+                                "name": "nome", 
+                                "type": "VARCHAR", 
+                                "length": "50"
+                            }, 
+                            {
+                                "name": "nasc", 
+                                "type": "DATE", 
+                                "not-null": "true"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "name": "JOGADORES", 
+                    "top": "770", 
+                    "left": "10", 
+                    "type": "conventional", 
+                    "attributes": {
+                        "attribute": [
+                            {
+                                "name": "pessoa_id", 
+                                "type": "INTEGER", 
+                                "key": "true"
+                            }, 
+                            {
+                                "name": "equipe_id", 
+                                "type": "INTEGER", 
+                                "key": "true"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "name": "JOGO", 
+                    "top": "470", 
+                    "left": "830", 
+                    "type": "conventional", 
+                    "attributes": {
+                        "attribute": [
+                            {
+                                "name": "numero", 
+                                "type": "INTEGER", 
+                                "key": "true"
+                            }, 
+                            {
+                                "name": "COPA_id", 
+                                "type": "INTEGER", 
+                                "key": "true"
+                            }, 
+                            {
+                                "name": "data", 
+                                "type": "DATE"
+                            }, 
+                            {
+                                "name": "hora", 
+                                "type": "TIME"
+                            }, 
+                            {
+                                "name": "estadio", 
+                                "type": "VARCHAR", 
+                                "length": "50"
+                            }, 
+                            {
+                                "name": "eq1", 
+                                "type": "INTEGER"
+                            }, 
+                            {
+                                "name": "eq2", 
+                                "type": "INTEGER"
+                            }, 
+                            {
+                                "name": "gol1", 
+                                "type": "INTEGER", 
+                                "not-null": "true"
+                            }, 
+                            {
+                                "name": "gol2", 
+                                "type": "INTEGER", 
+                                "not-null": "true"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "name": "EQUIPE", 
+                    "top": "450", 
+                    "left": "460", 
+                    "type": "conventional", 
+                    "attributes": {
+                        "attribute": [
+                            {
+                                "name": "id", 
+                                "type": "INTEGER", 
+                                "key": "true"
+                            }, 
+                            {
+                                "name": "copa", 
+                                "type": "INTEGER", 
+                                "key": "true"
+                            }, 
+                            {
+                                "name": "pais_id", 
+                                "type": "VARCHAR", 
+                                "length": "2"
+                            }, 
+                            {
+                                "name": "pessoa_id", 
+                                "type": "INTEGER"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "name": "CIDADE", 
+                    "top": "400", 
+                    "left": "30", 
+                    "type": "point", 
+                    "attributes": {
+                        "attribute": [
+                            {
+                                "name": "id", 
+                                "type": "VARCHAR", 
+                                "key": "true", 
+                                "length": "50"
+                            }, 
+                            {
+                                "name": "pais", 
+                                "type": "VARCHAR", 
+                                "key": "true", 
+                                "length": "2"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }, 
+        "relationships": {
+            "conventional": [
+                {
+                    "name": null, 
+                    "class1": "PAIS", 
+                    "cardinality1": {
+                        "min": "1", 
+                        "max": "1"
+                    }, 
+                    "class2": "SEDE", 
+                    "cardinality2": {
+                        "min": "0", 
+                        "max": "*"
+                    }
+                }, 
+                {
+                    "name": null, 
+                    "class1": "COPA", 
+                    "cardinality1": {
+                        "min": "1", 
+                        "max": "1"
+                    }, 
+                    "class2": "SEDE", 
+                    "cardinality2": {
+                        "min": "1", 
+                        "max": "*"
+                    }
+                }, 
+                {
+                    "name": null, 
+                    "class1": "EQUIPE", 
+                    "cardinality1": {
+                        "min": "0", 
+                        "max": "*"
+                    }, 
+                    "class2": "COPA", 
+                    "cardinality2": {
+                        "min": "1", 
+                        "max": "1"
+                    }
+                }, 
+                {
+                    "name": null, 
+                    "class1": "JOGO", 
+                    "cardinality1": {
+                        "min": "0", 
+                        "max": "*"
+                    }, 
+                    "class2": "COPA", 
+                    "cardinality2": {
+                        "min": "0", 
+                        "max": "*"
+                    }
+                }, 
+                {
+                    "name": null, 
+                    "class1": "PESSOA", 
+                    "cardinality1": {
+                        "min": "1", 
+                        "max": "1"
+                    }, 
+                    "class2": "JOGADORES", 
+                    "cardinality2": {
+                        "min": "0", 
+                        "max": "*"
+                    }
+                }, 
+                {
+                    "name": null, 
+                    "class1": "JOGADORES", 
+                    "cardinality1": {
+                        "min": "1", 
+                        "max": "*"
+                    }, 
+                    "class2": "EQUIPE", 
+                    "cardinality2": {
+                        "min": "1", 
+                        "max": "1"
+                    }
+                }
+            ], 
+            "topological": {
+                "spatial-relations": {
+                    "spatial-relation": "Contains", 
+                    "distance": null
+                }, 
+                "class1": "PAIS", 
+                "cardinality1": {
+                    "min": "1", 
+                    "max": "*"
+                }, 
+                "class2": "CIDADE", 
+                "cardinality2": {
+                    "min": "1", 
+                    "max": "*"
+                }
+            }
+        }
+    }
+}
