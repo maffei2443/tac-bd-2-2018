@@ -1,0 +1,27 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>ST_Locate_Between_Measures</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="PostGIS 1.4 Manual"><link rel="up" href="ch07.html#Linear_Referencing" title="7.9. Linear Referencing"><link rel="prev" href="ST_Locate_Along_Measure.html" title="ST_Locate_Along_Measure"><link rel="next" href="ST_LocateBetweenElevations.html" title="ST_LocateBetweenElevations"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">ST_Locate_Between_Measures</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ST_Locate_Along_Measure.html">Prev</a> </td><th width="60%" align="center">7.9. Linear Referencing</th><td width="20%" align="right"> <a accesskey="n" href="ST_LocateBetweenElevations.html">Next</a></td></tr></table><hr></div><div class="refentry" title="ST_Locate_Between_Measures"><a name="ST_Locate_Between_Measures"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>ST_Locate_Between_Measures &#8212; Return a derived geometry collection value with elements
+			that match the specified range of measures inclusively. Polygonal
+			elements are not supported.</p></div><div class="refsynopsisdiv" title="Synopsis"><h2>Synopsis</h2><div class="funcsynopsis"><p><code class="funcdef">geometry <b class="fsfunc">ST_Locate_Between_Measures</b>(</code>geometry  <var class="pdparam">geomA</var>, float  <var class="pdparam">measure_start</var>, float  <var class="pdparam">measure_end</var><code>)</code>;</p></div></div><div class="refsection" title="Description"><a name="id455486"></a><h2>Description</h2><p>Return a derived geometry collection value with elements
+			that match the specified range of measures inclusively. Polygonal
+			elements are not supported.</p><p>Semantic is specified by: ISO/IEC CD 13249-3:200x(E) - Text
+			for Continuation CD Editing Meeting</p><p>Availability: 1.1.0</p><p><span class="inlinemediaobject"><img src="images/check.png"></span> This function supports M coordinate.</p></div><div class="refsection" title="Examples"><a name="id455522"></a><h2>Examples</h2><pre class="programlisting">SELECT ST_AsEWKT(the_geom)
+		FROM
+		(SELECT ST_Locate_Between_Measures(
+			ST_GeomFromEWKT('MULTILINESTRINGM((1 2 3, 3 4 2, 9 4 3),
+		(1 2 3, 5 4 5))'),1.5, 3) As the_geom) As foo;
+
+							 st_asewkt
+-----------------------------------------------------------------
+ GEOMETRYCOLLECTIONM(LINESTRING(1 2 3,3 4 2,9 4 3),POINT(1 2 3))
+
+--Geometry collections are difficult animals so dump them
+--to make them more digestable
+SELECT ST_AsEWKT((ST_Dump(the_geom)).geom)
+		FROM
+		(SELECT ST_Locate_Between_Measures(
+			ST_GeomFromEWKT('MULTILINESTRINGM((1 2 3, 3 4 2, 9 4 3),
+		(1 2 3, 5 4 5))'),1.5, 3) As the_geom) As foo;
+
+		   st_asewkt
+--------------------------------
+ LINESTRINGM(1 2 3,3 4 2,9 4 3)
+ POINTM(1 2 3)</pre></div><div class="refsection" title="See Also"><a name="id455543"></a><h2>See Also</h2><p><a class="xref" href="ST_Dump.html" title="ST_Dump">ST_Dump</a>, <a class="xref" href="ST_Locate_Along_Measure.html" title="ST_Locate_Along_Measure">ST_Locate_Along_Measure</a></p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ST_Locate_Along_Measure.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch07.html#Linear_Referencing">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ST_LocateBetweenElevations.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">ST_Locate_Along_Measure </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> ST_LocateBetweenElevations</td></tr></table></div></body></html>

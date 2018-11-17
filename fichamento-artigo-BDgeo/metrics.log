@@ -1,0 +1,11 @@
+--2018-10-13 20:14:46--  https://static.springer.com/sgw/documents/1638769/application/pdf/10708_Journal+Metrics_2017_flyer.pdf
+Resolving static.springer.com (static.springer.com)... 151.101.92.95
+Connecting to static.springer.com (static.springer.com)|151.101.92.95|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 40152 (39K) [application/pdf]
+Saving to: ‘10708_Journal+Metrics_2017_flyer.pdf’
+
+     0K .......... .......... .......... .........            100%  607K=0,06s
+
+2018-10-13 20:14:46 (607 KB/s) - ‘10708_Journal+Metrics_2017_flyer.pdf’ saved [40152/40152]
+

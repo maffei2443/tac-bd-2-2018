@@ -1,0 +1,9 @@
+version: '3'
+
+networks:
+  cassandra_network:
+    driver: bridge
+
+services:
+  cassandra:
+    image: 'bitname/cassandra:latest'

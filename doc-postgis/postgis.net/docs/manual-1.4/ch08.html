@@ -1,0 +1,320 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 8. PostGIS Special Functions Index</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="PostGIS 1.4 Manual"><link rel="up" href="index.html" title="PostGIS 1.4 Manual"><link rel="prev" href="ST_HasBBox.html" title="ST_HasBBox"><link rel="next" href="ch09.html" title="Chapter 9. Reporting Problems"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. PostGIS Special Functions Index</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ST_HasBBox.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch09.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter 8. PostGIS Special Functions Index"><div class="titlepage"><div><div><h2 class="title"><a name="id494125"></a>Chapter 8. PostGIS Special Functions Index</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch08.html#PostGIS_Aggregate_Functions">8.1. PostGIS Aggregate Functions</a></span></dt><dt><span class="sect1"><a href="ch08.html#PostGIS_SQLMM_Functions">8.2. PostGIS SQL-MM Compliant Functions</a></span></dt><dt><span class="sect1"><a href="ch08.html#PostGIS_3D_Functions">8.3. PostGIS Functions that support 3D</a></span></dt><dt><span class="sect1"><a href="ch08.html#PostGIS_Curved_GeometryFunctions">8.4. PostGIS Curved Geometry Support Functions</a></span></dt><dt><span class="sect1"><a href="ch08.html#NewFunctions">8.5. New PostGIS Functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="ch08.html#NewFunctions_1_4">8.5.1. PostGIS Functions new in 1.4</a></span></dt><dt><span class="sect2"><a href="ch08.html#NewFunctions_1_3">8.5.2. PostGIS Functions new in 1.3</a></span></dt></dl></dd></dl></div><div class="sect1" title="8.1. PostGIS Aggregate Functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="PostGIS_Aggregate_Functions"></a>8.1. PostGIS Aggregate Functions</h2></div></div></div><p>The functions given below are spatial aggregate functions provided with PostGIS that can be used just like any other sql aggregate function such as sum, average.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><a class="link" href="ST_Accum.html" title="ST_Accum">ST_Accum</a> - Aggregate. Constructs an array of geometries.</li><li class="listitem"><a class="link" href="ST_Collect.html" title="ST_Collect">ST_Collect</a> - Return a specified ST_Geometry value from a collection of other geometries.</li><li class="listitem"><a class="link" href="ST_Extent.html" title="ST_Extent">ST_Extent</a> - an aggregate function that returns the bounding box that bounds rows of geometries.</li><li class="listitem"><a class="link" href="ST_Extent3D.html" title="ST_Extent3D">ST_Extent3D</a> - an aggregate function that returns the box3D bounding box that bounds rows of geometries.</li><li class="listitem"><a class="link" href="ST_MakeLine.html" title="ST_MakeLine">ST_MakeLine</a> - Creates a Linestring from point geometries.</li><li class="listitem"><a class="link" href="ST_MemUnion.html" title="ST_MemUnion">ST_MemUnion</a> - Same as ST_Union, only memory-friendly (uses less memory and more processor time).</li><li class="listitem"><a class="link" href="ST_Polygonize.html" title="ST_Polygonize">ST_Polygonize</a> - Aggregate. Creates a GeometryCollection containing possible polygons formed from the constituent linework of a set of geometries.</li><li class="listitem"><a class="link" href="ST_Union.html" title="ST_Union">ST_Union</a> - Returns a geometry that represents the point set union of the Geometries.</li></ul></div></div><div class="sect1" title="8.2. PostGIS SQL-MM Compliant Functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="PostGIS_SQLMM_Functions"></a>8.2. PostGIS SQL-MM Compliant Functions</h2></div></div></div><p>The functions given below are PostGIS functions that conform to the SQL/MM 3 standard</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>SQL-MM defines the default SRID of all geometry constructors as 0.
+			  PostGIS uses a default SRID of -1.</p></td></tr></table></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><a class="link" href="ST_Area.html" title="ST_Area">ST_Area</a> - Returns the area of the geometry if it is a polygon or multi-polygon.
+				
+				  
+				
+			   This method implements the SQL/MM specification:
+			SQL-MM 3: 8.1.2, 9.5.3</li><li class="listitem"><a class="link" href="ST_AsBinary.html" title="ST_AsBinary">ST_AsBinary</a> - Return the Well-Known Binary (WKB) representation of the geometry without SRID meta data.
+				
+				  
+				
+			   This method implements the SQL/MM specification: SQL-MM 3: 5.1.37
+			</li><li class="listitem"><a class="link" href="ST_AsText.html" title="ST_AsText">ST_AsText</a> - Return the Well-Known Text (WKT) representation of the geometry without SRID metadata.
+		
+		  
+		
+	   This method implements the SQL/MM specification:
+	  SQL-MM 3: 5.1.25</li><li class="listitem"><a class="link" href="ST_Boundary.html" title="ST_Boundary">ST_Boundary</a> - Returns the closure of the combinatorial boundary of this Geometry.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 5.1.14</li><li class="listitem"><a class="link" href="ST_Buffer.html" title="ST_Buffer">ST_Buffer</a> - Returns a geometry that represents all points whose distance from this Geometry is less than or equal to distance. Calculations are in the Spatial Reference System of this Geometry. The optional third parameter sets the number of segments used to approximate a quarter circle (defaults to 8).
+					
+					  
+					
+				   This method implements the SQL/MM specification:
+				SQL-MM 3: 5.1.17</li><li class="listitem"><a class="link" href="ST_Centroid.html" title="ST_Centroid">ST_Centroid</a> - Returns the geometric center of a geometry.
+		  
+			
+		  
+		 This method implements the SQL/MM
+	  specification: SQL-MM 3: 8.1.4, 9.5.5</li><li class="listitem"><a class="link" href="ST_Contains.html" title="ST_Contains">ST_Contains</a> - Returns true if and only if no points of B lie in the exterior of A, and at least one point of the interior of B lies in the interior of A.
+			
+				
+				  
+				
+			   This method implements the SQL/MM specification:
+			SQL-MM 3: 5.1.31</li><li class="listitem"><a class="link" href="ST_ConvexHull.html" title="ST_ConvexHull">ST_ConvexHull</a> - The convex hull of a geometry represents the minimum convex geometry that encloses all geometries within the set.
+				
+				  
+				
+			   This method implements the SQL/MM specification: SQL-MM 3: 5.1.16</li><li class="listitem"><a class="link" href="ST_CoordDim.html" title="ST_CoordDim">ST_CoordDim</a> - Return the coordinate dimension of the ST_Geometry value.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 5.1.3</li><li class="listitem"><a class="link" href="ST_Crosses.html" title="ST_Crosses">ST_Crosses</a> - Returns TRUE if the supplied geometries have some, but not all, interior points in common.
+	  
+	  This method implements the SQL/MM specification: SQL-MM 3: 5.1.29
+	</li><li class="listitem"><a class="link" href="ST_CurveToLine.html" title="ST_CurveToLine">ST_CurveToLine</a> - Converts a CIRCULARSTRING/CURVEDPOLYGON to a LINESTRING/POLYGON
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 7.1.7 </li><li class="listitem"><a class="link" href="ST_Difference.html" title="ST_Difference">ST_Difference</a> - Returns a geometry that represents that part of geometry A that does not intersect with geometry B.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 5.1.20</li><li class="listitem"><a class="link" href="ST_Dimension.html" title="ST_Dimension">ST_Dimension</a> - The inherent dimension of this Geometry object, which must be less than or equal to the coordinate dimension.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 5.1.2</li><li class="listitem"><a class="link" href="ST_Disjoint.html" title="ST_Disjoint">ST_Disjoint</a> - Returns TRUE if the Geometries do not "spatially intersect" - if they do not share any space together.
+				
+				  
+				
+			   This method implements the SQL/MM specification: SQL-MM 3: 5.1.26</li><li class="listitem"><a class="link" href="ST_Distance.html" title="ST_Distance">ST_Distance</a> - Returns the 2-dimensional cartesian minimum distance between two geometries in projected units.
+		  
+		  This method implements the SQL/MM specification: SQL-MM 3: 5.1.23
+		</li><li class="listitem"><a class="link" href="ST_EndPoint.html" title="ST_EndPoint">ST_EndPoint</a> - Returns the last point of a LINESTRING geometry as a POINT.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 7.1.4</li><li class="listitem"><a class="link" href="ST_Envelope.html" title="ST_Envelope">ST_Envelope</a> - Returns a geometry representing the bounding box of the supplied geometry.
+        
+          
+        
+       This method implements the SQL/MM specification: SQL-MM 3: 5.1.15</li><li class="listitem"><a class="link" href="ST_Equals.html" title="ST_Equals">ST_Equals</a> - Returns true if the given geometries represent the same geometry. Directionality is ignored.
+		
+		  
+		
+	   This method implements the SQL/MM specification:
+				SQL-MM 3: 5.1.24
+		</li><li class="listitem"><a class="link" href="ST_ExteriorRing.html" title="ST_ExteriorRing">ST_ExteriorRing</a> - Returns a line string representing the exterior ring of the POLYGON geometry. Return NULL if the geometry is not a polygon. Will not work with MULTIPOLYGON
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 8.2.3, 8.3.3</li><li class="listitem"><a class="link" href="ST_GeomCollFromText.html" title="ST_GeomCollFromText">ST_GeomCollFromText</a> - Makes a collection Geometry from collection WKT with the given SRID. If SRID is not give, it defaults to -1.
+			
+			  
+			
+		   This method implements the SQL/MM specification: ?</li><li class="listitem"><a class="link" href="ST_GeomFromText.html" title="ST_GeomFromText">ST_GeomFromText</a> - Return a specified ST_Geometry value from Well-Known Text representation (WKT).
+				
+				  
+				
+			   This method implements the SQL/MM specification:
+			SQL-MM 3: 5.1.40</li><li class="listitem"><a class="link" href="ST_GeomFromWKB.html" title="ST_GeomFromWKB">ST_GeomFromWKB</a> - Creates a geometry instance from a Well-Known Binary geometry representation (WKB) and optional SRID.
+			
+			  
+			
+		  This method implements the SQL/MM specification: SQL-MM 3: 5.1.41</li><li class="listitem"><a class="link" href="ST_GeometryFromText.html" title="ST_GeometryFromText">ST_GeometryFromText</a> - Return a specified ST_Geometry value from Well-Known Text representation (WKT). This is an alias name for ST_GeomFromText
+				
+				  
+				
+			   This method implements the SQL/MM specification:
+			SQL-MM 3: 5.1.40</li><li class="listitem"><a class="link" href="ST_GeometryN.html" title="ST_GeometryN">ST_GeometryN</a> - Return the 1-based Nth geometry if the geometry is a GEOMETRYCOLLECTION, MULTIPOINT, MULTILINESTRING, MULTICURVE or MULTIPOLYGON. Otherwise, return NULL.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 9.1.5</li><li class="listitem"><a class="link" href="ST_GeometryType.html" title="ST_GeometryType">ST_GeometryType</a> - Return the geometry type of the ST_Geometry value.
+					
+					  
+					
+				   This method implements the SQL/MM specification:
+				SQL-MM 3: 5.1.4</li><li class="listitem"><a class="link" href="ST_InteriorRingN.html" title="ST_InteriorRingN">ST_InteriorRingN</a> - Return the Nth interior linestring ring of the polygon geometry. Return NULL if the geometry is not a polygon or the given N is out of range.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 8.2.6, 8.3.5</li><li class="listitem"><a class="link" href="ST_Intersection.html" title="ST_Intersection">ST_Intersection</a> - Returns a geometry that represents the shared portion of geomA and geomB
+				
+				  
+				
+			   This method implements the SQL/MM specification: SQL-MM 3: 5.1.18</li><li class="listitem"><a class="link" href="ST_Intersects.html" title="ST_Intersects">ST_Intersects</a> - Returns TRUE if the Geometries "spatially intersect" - (share any portion of space) and FALSE if they don't (they are Disjoint).
+				
+				  
+				
+			  This method implements the SQL/MM specification:
+			SQL-MM 3: 5.1.27</li><li class="listitem"><a class="link" href="ST_IsClosed.html" title="ST_IsClosed">ST_IsClosed</a> - Returns TRUE if the LINESTRING's start and end points are coincident.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 7.1.5, 9.3.3</li><li class="listitem"><a class="link" href="ST_IsEmpty.html" title="ST_IsEmpty">ST_IsEmpty</a> - Returns true if this Geometry is an empty geometry . If true, then this Geometry represents the empty point set - i.e. GEOMETRYCOLLECTION(EMPTY).
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 5.1.7</li><li class="listitem"><a class="link" href="ST_IsRing.html" title="ST_IsRing">ST_IsRing</a> - Returns TRUE if this LINESTRING is both closed and simple.
+		  
+			
+		  
+		 This method implements the SQL/MM specification:
+	  SQL-MM 3: 7.1.6</li><li class="listitem"><a class="link" href="ST_IsSimple.html" title="ST_IsSimple">ST_IsSimple</a> - Returns (TRUE) if this Geometry has no anomalous geometric points, such as self intersection or self tangency.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 5.1.8</li><li class="listitem"><a class="link" href="ST_IsValid.html" title="ST_IsValid">ST_IsValid</a> - Returns true if the ST_Geometry is well formed.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 5.1.9</li><li class="listitem"><a class="link" href="ST_Length.html" title="ST_Length">ST_Length</a> - Returns the 2d length of the geometry if it is a linestring or multilinestring.
+				
+				  
+				
+			   This method implements the SQL/MM specification:
+			SQL-MM 3: 7.1.2, 9.3.4</li><li class="listitem"><a class="link" href="ST_LineFromText.html" title="ST_LineFromText">ST_LineFromText</a> - Makes a Geometry from WKT representation with the given SRID. If SRID is not given, it defaults to -1.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 7.2.8</li><li class="listitem"><a class="link" href="ST_LineFromWKB.html" title="ST_LineFromWKB">ST_LineFromWKB</a> - Makes a LINESTRING from WKB with the given SRID
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 7.2.9</li><li class="listitem"><a class="link" href="ST_LinestringFromWKB.html" title="ST_LinestringFromWKB">ST_LinestringFromWKB</a> - Makes a geometry from WKB with the given SRID.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 7.2.9</li><li class="listitem"><a class="link" href="ST_M.html" title="ST_M">ST_M</a> - Return the M coordinate of the point, or NULL if not available. Input must be a point.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3 New standard: ?</li><li class="listitem"><a class="link" href="ST_MLineFromText.html" title="ST_MLineFromText">ST_MLineFromText</a> - Return a specified ST_MultiLineString value from WKT representation.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 9.4.4</li><li class="listitem"><a class="link" href="ST_MPointFromText.html" title="ST_MPointFromText">ST_MPointFromText</a> - Makes a Geometry from WKT with the given SRID. If SRID is not give, it defaults to -1.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 9.2.4</li><li class="listitem"><a class="link" href="ST_MPolyFromText.html" title="ST_MPolyFromText">ST_MPolyFromText</a> - Makes a MultiPolygon Geometry from WKT with the given SRID. If SRID is not give, it defaults to -1.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 9.6.4</li><li class="listitem"><a class="link" href="ST_NumGeometries.html" title="ST_NumGeometries">ST_NumGeometries</a> - If geometry is a GEOMETRYCOLLECTION (or MULTI*) return the number of geometries, otherwise return NULL.
+		
+		  
+		
+	   This method implements the SQL/MM specification: SQL-MM 3: 9.1.4</li><li class="listitem"><a class="link" href="ST_NumInteriorRing.html" title="ST_NumInteriorRing">ST_NumInteriorRing</a> - Return the number of interior rings of the first polygon in the geometry. Synonym to ST_NumInteriorRings.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 8.2.5</li><li class="listitem"><a class="link" href="ST_NumInteriorRings.html" title="ST_NumInteriorRings">ST_NumInteriorRings</a> - Return the number of interior rings of the first polygon in the geometry. This will work with both POLYGON and MULTIPOLYGON types but only looks at the first polygon. Return NULL if there is no polygon in the geometry.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 8.2.5</li><li class="listitem"><a class="link" href="ST_NumPoints.html" title="ST_NumPoints">ST_NumPoints</a> - Return the number of points in an ST_LineString or ST_CircularString value.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 7.2.4</li><li class="listitem"><a class="link" href="ST_OrderingEquals.html" title="ST_OrderingEquals">ST_OrderingEquals</a> - Returns true if the given geometries represent the same geometry and points are in the same directional order.
+		  
+		  This method implements the SQL/MM specification: SQL-MM 3: 5.1.43
+		</li><li class="listitem"><a class="link" href="ST_Overlaps.html" title="ST_Overlaps">ST_Overlaps</a> - Returns TRUE if the Geometries share space, are of the same dimension, but are not completely contained by each other.
+		  
+		  This method implements the SQL/MM specification: SQL-MM 3: 5.1.32
+		</li><li class="listitem"><a class="link" href="ST_Perimeter.html" title="ST_Perimeter">ST_Perimeter</a> - Return the length measurement of the boundary of an ST_Surface or ST_MultiSurface value. (Polygon, Multipolygon)
+				
+				  
+				
+			   This method implements the SQL/MM specification:
+			SQL-MM 3: 8.1.3, 9.5.4</li><li class="listitem"><a class="link" href="ST_Point.html" title="ST_Point">ST_Point</a> - Returns an ST_Point with the given coordinate values. OGC alias for ST_MakePoint.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 6.1.2</li><li class="listitem"><a class="link" href="ST_PointFromText.html" title="ST_PointFromText">ST_PointFromText</a> - Makes a point Geometry from WKT with the given SRID. If SRID is not given, it defaults to unknown.
+				
+				  
+				
+			   This method implements the SQL/MM specification:SQL-MM 3: 6.1.8</li><li class="listitem"><a class="link" href="ST_PointFromWKB.html" title="ST_PointFromWKB">ST_PointFromWKB</a> - Makes a geometry from WKB with the given SRID
+			
+			  
+			
+			This method implements the SQL/MM specification: SQL-MM 3: 6.1.9
+		</li><li class="listitem"><a class="link" href="ST_PointN.html" title="ST_PointN">ST_PointN</a> - Return the Nth point in the first linestring or circular linestring in the geometry. Return NULL if there is no linestring in the geometry.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 7.2.5, 7.3.5</li><li class="listitem"><a class="link" href="ST_PointOnSurface.html" title="ST_PointOnSurface">ST_PointOnSurface</a> - Returns a POINT guaranteed to lie on the surface.
+			
+			  
+			
+		   This method implements the SQL/MM
+		specification: SQL-MM 3: 8.1.5, 9.5.6.
+		 According to the specs, ST_PointOnSurface works for surface geometries (POLYGONs, MULTIPOLYGONS, CURVED POLYGONS).  So PostGIS seems to be extending what
+		 the spec allows here.  Most databases Oracle,DB II, ESRI SDE seem to only support this function for surfaces.  SQL Server 2008 like PostGIS supports for all common geometries.
+	</li><li class="listitem"><a class="link" href="ST_Polygon.html" title="ST_Polygon">ST_Polygon</a> - Returns a polygon built from the specified linestring and SRID.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 8.3.2</li><li class="listitem"><a class="link" href="ST_PolygonFromText.html" title="ST_PolygonFromText">ST_PolygonFromText</a> - Makes a Geometry from WKT with the given SRID. If SRID is not give, it defaults to -1.
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 8.3.6</li><li class="listitem"><a class="link" href="ST_Relate.html" title="ST_Relate">ST_Relate</a> - Returns true if this Geometry is spatially related to anotherGeometry, by testing for intersections between the Interior, Boundary and Exterior of the two geometries as specified by the values in the intersectionMatrixPattern. If no intersectionMatrixPattern is passed in, then returns the maximum intersectionMatrixPattern that relates the 2 geometries.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 5.1.25</li><li class="listitem"><a class="link" href="ST_SRID.html" title="ST_SRID">ST_SRID</a> - Returns the spatial reference identifier for the ST_Geometry as defined in spatial_ref_sys table.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 5.1.5</li><li class="listitem"><a class="link" href="ST_StartPoint.html" title="ST_StartPoint">ST_StartPoint</a> - Returns the first point of a LINESTRING geometry as a POINT.
+		  
+			
+		  
+		 This method implements the SQL/MM specification:
+	  SQL-MM 3: 7.1.3</li><li class="listitem"><a class="link" href="ST_SymDifference.html" title="ST_SymDifference">ST_SymDifference</a> - Returns a geometry that represents the portions of A and B that do not intersect. It is called a symmetric difference because ST_SymDifference(A,B) = ST_SymDifference(B,A).
+			
+			  
+			
+		   This method implements the SQL/MM specification: SQL-MM 3: 5.1.21</li><li class="listitem"><a class="link" href="ST_Touches.html" title="ST_Touches">ST_Touches</a> - Returns TRUE if the geometries have at least one point in common, but their interiors do not intersect.
+			
+			  
+			
+		   This method implements the SQL/MM
+		specification: SQL-MM 3: 5.1.28</li><li class="listitem"><a class="link" href="ST_Transform.html" title="ST_Transform">ST_Transform</a> - Returns a new geometry with its coordinates transformed to the SRID referenced by the integer parameter.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 5.1.6</li><li class="listitem"><a class="link" href="ST_Union.html" title="ST_Union">ST_Union</a> - Returns a geometry that represents the point set union of the Geometries.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3: 5.1.19</li><li class="listitem"><a class="link" href="ST_WKBToSQL.html" title="ST_WKBToSQL">ST_WKBToSQL</a> - Return a specified ST_Geometry value from Well-Known Binary representation (WKB). This is an alias name for ST_GeomFromWKB that takes no srid
+				
+				  
+				
+			   This method implements the SQL/MM specification: SQL-MM 3: 5.1.36</li><li class="listitem"><a class="link" href="ST_WKTToSQL.html" title="ST_WKTToSQL">ST_WKTToSQL</a> - Return a specified ST_Geometry value from Well-Known Text representation (WKT). This is an alias name for ST_GeomFromText
+				
+				  
+				
+			   This method implements the SQL/MM specification:
+			SQL-MM 3: 5.1.34</li><li class="listitem"><a class="link" href="ST_Within.html" title="ST_Within">ST_Within</a> - Returns true if the geometry A is completely inside geometry B
+			
+				
+				  
+				
+			   This method implements the SQL/MM specification:
+			SQL-MM 3: 5.1.30</li><li class="listitem"><a class="link" href="ST_X.html" title="ST_X">ST_X</a> - Return the X coordinate of the point, or NULL if not available. Input must be a point.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3 standard: SQL-MM 3: 6.1.3</li><li class="listitem"><a class="link" href="ST_Y.html" title="ST_Y">ST_Y</a> - Return the Y coordinate of the point, or NULL if not available. Input must be a point.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3 standard: SQL-MM 3: 6.1.4</li><li class="listitem"><a class="link" href="ST_Z.html" title="ST_Z">ST_Z</a> - Return the Z coordinate of the point, or NULL if not available. Input must be a point.
+			
+			  
+			
+		   This method implements the SQL/MM specification:
+		SQL-MM 3 standard New Spec: ?</li></ul></div></div><div class="sect1" title="8.3. PostGIS Functions that support 3D"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="PostGIS_3D_Functions"></a>8.3. PostGIS Functions that support 3D</h2></div></div></div><p>The functions given below are PostGIS functions that do not throw away the Z-Index.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><a class="link" href="AddGeometryColumn.html" title="AddGeometryColumn">AddGeometryColumn</a> - Adds a geometry column to an existing table of attributes.</li><li class="listitem"><a class="link" href="DropGeometryColumn.html" title="DropGeometryColumn">DropGeometryColumn</a> - Removes a geometry column from a spatial table.</li><li class="listitem"><a class="link" href="ST_Accum.html" title="ST_Accum">ST_Accum</a> - Aggregate. Constructs an array of geometries.</li><li class="listitem"><a class="link" href="ST_AddPoint.html" title="ST_AddPoint">ST_AddPoint</a> - Adds a point to a LineString before point &lt;position&gt; (0-based index).</li><li class="listitem"><a class="link" href="ST_Affine.html" title="ST_Affine">ST_Affine</a> - Applies a 3d affine transformation to the geometry to do things like translate, rotate, scale in one step.</li><li class="listitem"><a class="link" href="ST_AsEWKB.html" title="ST_AsEWKB">ST_AsEWKB</a> - Return the Well-Known Binary (WKB) representation of the geometry with SRID meta data.</li><li class="listitem"><a class="link" href="ST_AsEWKT.html" title="ST_AsEWKT">ST_AsEWKT</a> - Return the Well-Known Text (WKT) representation of the geometry with SRID meta data.</li><li class="listitem"><a class="link" href="ST_AsGML.html" title="ST_AsGML">ST_AsGML</a> - Return the geometry as a GML version 2 or 3 element.</li><li class="listitem"><a class="link" href="ST_AsGeoJSON.html" title="ST_AsGeoJSON">ST_AsGeoJSON</a> - Return the geometry as a GeoJSON element.</li><li class="listitem"><a class="link" href="ST_AsHEXEWKB.html" title="ST_AsHEXEWKB">ST_AsHEXEWKB</a> - Returns a Geometry in HEXEWKB format (as text) using either little-endian (NDR) or big-endian (XDR) encoding.</li><li class="listitem"><a class="link" href="ST_AsKML.html" title="ST_AsKML">ST_AsKML</a> - Return the geometry as a KML element. Several variants. Default version=2, default precision=15</li><li class="listitem"><a class="link" href="ST_Boundary.html" title="ST_Boundary">ST_Boundary</a> - Returns the closure of the combinatorial boundary of this Geometry.</li><li class="listitem"><a class="link" href="ST_Box3D.html" title="ST_Box3D">ST_Box3D</a> - Returns a BOX3D representing the maximum extents of the geometry.</li><li class="listitem"><a class="link" href="ST_Collect.html" title="ST_Collect">ST_Collect</a> - Return a specified ST_Geometry value from a collection of other geometries.</li><li class="listitem"><a class="link" href="ST_ConvexHull.html" title="ST_ConvexHull">ST_ConvexHull</a> - The convex hull of a geometry represents the minimum convex geometry that encloses all geometries within the set.</li><li class="listitem"><a class="link" href="ST_CoordDim.html" title="ST_CoordDim">ST_CoordDim</a> - Return the coordinate dimension of the ST_Geometry value.</li><li class="listitem"><a class="link" href="ST_CurveToLine.html" title="ST_CurveToLine">ST_CurveToLine</a> - Converts a CIRCULARSTRING/CURVEDPOLYGON to a LINESTRING/POLYGON</li><li class="listitem"><a class="link" href="ST_Difference.html" title="ST_Difference">ST_Difference</a> - Returns a geometry that represents that part of geometry A that does not intersect with geometry B.</li><li class="listitem"><a class="link" href="ST_Dump.html" title="ST_Dump">ST_Dump</a> - Returns a set of geometry_dump (geom,path) rows, that make up a geometry g1.</li><li class="listitem"><a class="link" href="ST_DumpRings.html" title="ST_DumpRings">ST_DumpRings</a> - Returns a set of geometry_dump rows, representing the exterior and interior rings of a polygon.</li><li class="listitem"><a class="link" href="ST_EndPoint.html" title="ST_EndPoint">ST_EndPoint</a> - Returns the last point of a LINESTRING geometry as a POINT.</li><li class="listitem"><a class="link" href="ST_Extent3D.html" title="ST_Extent3D">ST_Extent3D</a> - an aggregate function that returns the box3D bounding box that bounds rows of geometries.</li><li class="listitem"><a class="link" href="ST_ExteriorRing.html" title="ST_ExteriorRing">ST_ExteriorRing</a> - Returns a line string representing the exterior ring of the POLYGON geometry. Return NULL if the geometry is not a polygon. Will not work with MULTIPOLYGON</li><li class="listitem"><a class="link" href="ST_ForceRHR.html" title="ST_ForceRHR">ST_ForceRHR</a> - Forces the orientation of the vertices in a polygon to follow the Right-Hand-Rule.</li><li class="listitem"><a class="link" href="ST_Force_3D.html" title="ST_Force_3D">ST_Force_3D</a> - Forces the geometries into XYZ mode. This is an alias for ST_Force_3DZ.</li><li class="listitem"><a class="link" href="ST_Force_3DZ.html" title="ST_Force_3DZ">ST_Force_3DZ</a> - Forces the geometries into XYZ mode. This is a synonym for ST_Force_3D.</li><li class="listitem"><a class="link" href="ST_Force_4D.html" title="ST_Force_4D">ST_Force_4D</a> - Forces the geometries into XYZM mode.</li><li class="listitem"><a class="link" href="ST_Force_Collection.html" title="ST_Force_Collection">ST_Force_Collection</a> - Converts the geometry into a GEOMETRYCOLLECTION.</li><li class="listitem"><a class="link" href="ST_GeomFromEWKB.html" title="ST_GeomFromEWKB">ST_GeomFromEWKB</a> - Return a specified ST_Geometry value from Extended Well-Known Binary representation (EWKB).</li><li class="listitem"><a class="link" href="ST_GeomFromEWKT.html" title="ST_GeomFromEWKT">ST_GeomFromEWKT</a> - Return a specified ST_Geometry value from Extended Well-Known Text representation (EWKT).</li><li class="listitem"><a class="link" href="ST_GeometryN.html" title="ST_GeometryN">ST_GeometryN</a> - Return the 1-based Nth geometry if the geometry is a GEOMETRYCOLLECTION, MULTIPOINT, MULTILINESTRING, MULTICURVE or MULTIPOLYGON. Otherwise, return NULL.</li><li class="listitem"><a class="link" href="ST_HasArc.html" title="ST_HasArc">ST_HasArc</a> - Returns true if a geometry or geometry collection contains a circular string</li><li class="listitem"><a class="link" href="ST_InteriorRingN.html" title="ST_InteriorRingN">ST_InteriorRingN</a> - Return the Nth interior linestring ring of the polygon geometry. Return NULL if the geometry is not a polygon or the given N is out of range.</li><li class="listitem"><a class="link" href="ST_IsClosed.html" title="ST_IsClosed">ST_IsClosed</a> - Returns TRUE if the LINESTRING's start and end points are coincident.</li><li class="listitem"><a class="link" href="ST_IsSimple.html" title="ST_IsSimple">ST_IsSimple</a> - Returns (TRUE) if this Geometry has no anomalous geometric points, such as self intersection or self tangency.</li><li class="listitem"><a class="link" href="ST_Length3D.html" title="ST_Length3D">ST_Length3D</a> - Returns the 3-dimensional or 2-dimensional length of the geometry if it is a linestring or multi-linestring.</li><li class="listitem"><a class="link" href="ST_Length3D_Spheroid.html" title="ST_Length3D_Spheroid">ST_Length3D_Spheroid</a> - Calculates the length of a geometry on an ellipsoid, taking the elevation into account. This is just an alias for ST_Length_Spheroid.</li><li class="listitem"><a class="link" href="ST_Length_Spheroid.html" title="ST_Length_Spheroid">ST_Length_Spheroid</a> - Calculates the 2D or 3D length of a linestring/multilinestring on an ellipsoid. This is useful if the coordinates of the geometry are in longitude/latitude and a length is desired without reprojection.</li><li class="listitem"><a class="link" href="ST_LineFromMultiPoint.html" title="ST_LineFromMultiPoint">ST_LineFromMultiPoint</a> - Creates a LineString from a MultiPoint geometry.</li><li class="listitem"><a class="link" href="ST_LineToCurve.html" title="ST_LineToCurve">ST_LineToCurve</a> - Converts a LINESTRING/POLYGON to a CIRCULARSTRING, CURVED POLYGON</li><li class="listitem"><a class="link" href="ST_Line_Interpolate_Point.html" title="ST_Line_Interpolate_Point">ST_Line_Interpolate_Point</a> - Returns a point interpolated along a line. Second argument is a float8 between 0 and 1 representing fraction of total length of linestring the point has to be located.</li><li class="listitem"><a class="link" href="ST_Line_Substring.html" title="ST_Line_Substring">ST_Line_Substring</a> - Return a linestring being a substring of the input one starting and ending at the given fractions of total 2d length. Second and third arguments are float8 values between 0 and 1.</li><li class="listitem"><a class="link" href="ST_LocateBetweenElevations.html" title="ST_LocateBetweenElevations">ST_LocateBetweenElevations</a> - Return a derived geometry (collection) value with elements that intersect the specified range of elevations inclusively. Only 3D, 4D LINESTRINGS and MULTILINESTRINGS are supported.</li><li class="listitem"><a class="link" href="ST_M.html" title="ST_M">ST_M</a> - Return the M coordinate of the point, or NULL if not available. Input must be a point.</li><li class="listitem"><a class="link" href="ST_MakeBox3D.html" title="ST_MakeBox3D">ST_MakeBox3D</a> - Creates a BOX3D defined by the given 3d point geometries.</li><li class="listitem"><a class="link" href="ST_MakeLine.html" title="ST_MakeLine">ST_MakeLine</a> - Creates a Linestring from point geometries.</li><li class="listitem"><a class="link" href="ST_MakePoint.html" title="ST_MakePoint">ST_MakePoint</a> - Creates a 2D,3DZ or 4D point geometry.</li><li class="listitem"><a class="link" href="ST_MakePolygon.html" title="ST_MakePolygon">ST_MakePolygon</a> - Creates a Polygon formed by the given shell. Input geometries must be closed LINESTRINGS.</li><li class="listitem"><a class="link" href="ST_MemUnion.html" title="ST_MemUnion">ST_MemUnion</a> - Same as ST_Union, only memory-friendly (uses less memory and more processor time).</li><li class="listitem"><a class="link" href="ST_Mem_Size.html" title="ST_Mem_Size">ST_Mem_Size</a> - Returns the amount of space (in bytes) the geometry takes.</li><li class="listitem"><a class="link" href="ST_NDims.html" title="ST_NDims">ST_NDims</a> - Returns coordinate dimension of the geometry as a small int. Values are: 2,3 or 4.</li><li class="listitem"><a class="link" href="ST_NPoints.html" title="ST_NPoints">ST_NPoints</a> - Return the number of points (vertexes) in a geometry.</li><li class="listitem"><a class="link" href="ST_NRings.html" title="ST_NRings">ST_NRings</a> - If the geometry is a polygon or multi-polygon returns the number of rings.</li><li class="listitem"><a class="link" href="ST_Perimeter3D.html" title="ST_Perimeter3D">ST_Perimeter3D</a> - Returns the 3-dimensional perimeter of the geometry, if it is a polygon or multi-polygon.</li><li class="listitem"><a class="link" href="ST_PointN.html" title="ST_PointN">ST_PointN</a> - Return the Nth point in the first linestring or circular linestring in the geometry. Return NULL if there is no linestring in the geometry.</li><li class="listitem"><a class="link" href="ST_PointOnSurface.html" title="ST_PointOnSurface">ST_PointOnSurface</a> - Returns a POINT guaranteed to lie on the surface.</li><li class="listitem"><a class="link" href="ST_Polygon.html" title="ST_Polygon">ST_Polygon</a> - Returns a polygon built from the specified linestring and SRID.</li><li class="listitem"><a class="link" href="ST_RemovePoint.html" title="ST_RemovePoint">ST_RemovePoint</a> - Removes point from a linestring. Offset is 0-based.</li><li class="listitem"><a class="link" href="ST_Rotate.html" title="ST_Rotate">ST_Rotate</a> - This is a synonym for ST_RotateZ</li><li class="listitem"><a class="link" href="ST_RotateX.html" title="ST_RotateX">ST_RotateX</a> - Rotate a geometry rotRadians about the X axis.</li><li class="listitem"><a class="link" href="ST_RotateY.html" title="ST_RotateY">ST_RotateY</a> - Rotate a geometry rotRadians about the Y axis.</li><li class="listitem"><a class="link" href="ST_RotateZ.html" title="ST_RotateZ">ST_RotateZ</a> - Rotate a geometry rotRadians about the Z axis.</li><li class="listitem"><a class="link" href="ST_Scale.html" title="ST_Scale">ST_Scale</a> - Scales the geometry to a new size by multiplying the ordinates with the parameters. Ie: ST_Scale(geom, Xfactor, Yfactor, Zfactor).</li><li class="listitem"><a class="link" href="ST_SetPoint.html" title="ST_SetPoint">ST_SetPoint</a> - Replace point N of linestring with given point. Index is 0-based.</li><li class="listitem"><a class="link" href="ST_Shift_Longitude.html" title="ST_Shift_Longitude">ST_Shift_Longitude</a> - Reads every point/vertex in every component of every feature in a geometry, and if the longitude coordinate is &lt;0, adds 360 to it. The result would be a 0-360 version of the data to be plotted in a 180 centric map</li><li class="listitem"><a class="link" href="ST_SnapToGrid.html" title="ST_SnapToGrid">ST_SnapToGrid</a> - Snap all points of the input geometry to the grid defined by its origin and cell size. Remove consecutive points falling on the same cell, eventually returning NULL if output points are not enough to define a geometry of the given type. Collapsed geometries in a collection are stripped from it. Useful for reducing precision.</li><li class="listitem"><a class="link" href="ST_StartPoint.html" title="ST_StartPoint">ST_StartPoint</a> - Returns the first point of a LINESTRING geometry as a POINT.</li><li class="listitem"><a class="link" href="ST_Summary.html" title="ST_Summary">ST_Summary</a> - Returns a text summary of the contents of the ST_Geometry.</li><li class="listitem"><a class="link" href="ST_SymDifference.html" title="ST_SymDifference">ST_SymDifference</a> - Returns a geometry that represents the portions of A and B that do not intersect. It is called a symmetric difference because ST_SymDifference(A,B) = ST_SymDifference(B,A).</li><li class="listitem"><a class="link" href="ST_TransScale.html" title="ST_TransScale">ST_TransScale</a> - Translates the geometry using the deltaX and deltaY args, then scales it using the XFactor, YFactor args, working in 2D only.</li><li class="listitem"><a class="link" href="ST_Translate.html" title="ST_Translate">ST_Translate</a> - Translates the geometry to a new location using the numeric parameters as offsets. Ie: ST_Translate(geom, X, Y) or ST_Translate(geom, X, Y,Z).</li><li class="listitem"><a class="link" href="ST_Union.html" title="ST_Union">ST_Union</a> - Returns a geometry that represents the point set union of the Geometries.</li><li class="listitem"><a class="link" href="ST_X.html" title="ST_X">ST_X</a> - Return the X coordinate of the point, or NULL if not available. Input must be a point.</li><li class="listitem"><a class="link" href="ST_XMax.html" title="ST_XMax">ST_XMax</a> - Returns X maxima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_XMin.html" title="ST_XMin">ST_XMin</a> - Returns X minima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_Y.html" title="ST_Y">ST_Y</a> - Return the Y coordinate of the point, or NULL if not available. Input must be a point.</li><li class="listitem"><a class="link" href="ST_YMax.html" title="ST_YMax">ST_YMax</a> - Returns Y maxima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_YMin.html" title="ST_YMin">ST_YMin</a> - Returns Y minima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_Z.html" title="ST_Z">ST_Z</a> - Return the Z coordinate of the point, or NULL if not available. Input must be a point.</li><li class="listitem"><a class="link" href="ST_ZMax.html" title="ST_ZMax">ST_ZMax</a> - Returns Z minima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_ZMin.html" title="ST_ZMin">ST_ZMin</a> - Returns Z minima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_Zmflag.html" title="ST_Zmflag">ST_Zmflag</a> - Returns ZM (dimension semantic) flag of the geometries as a small int. Values are: 0=2d, 1=3dm, 2=3dz, 3=4d.</li><li class="listitem"><a class="link" href="UpdateGeometrySRID.html" title="UpdateGeometrySRID">UpdateGeometrySRID</a> - Updates the SRID of all features in a geometry column, geometry_columns metadata and srid table constraint</li></ul></div></div><div class="sect1" title="8.4. PostGIS Curved Geometry Support Functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="PostGIS_Curved_GeometryFunctions"></a>8.4. PostGIS Curved Geometry Support Functions</h2></div></div></div><p>The functions given below are PostGIS functions that can use CIRCULARSTRING, CURVEDPOLYGON, and other curved geometry types</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><a class="link" href="AddGeometryColumn.html" title="AddGeometryColumn">AddGeometryColumn</a> - Adds a geometry column to an existing table of attributes.</li><li class="listitem"><a class="link" href="DropGeometryColumn.html" title="DropGeometryColumn">DropGeometryColumn</a> - Removes a geometry column from a spatial table.</li><li class="listitem"><a class="link" href="GeometryType.html" title="GeometryType">GeometryType</a> - Returns the type of the geometry as a string. Eg: 'LINESTRING', 'POLYGON', 'MULTIPOINT', etc.</li><li class="listitem"><a class="link" href="ST_Accum.html" title="ST_Accum">ST_Accum</a> - Aggregate. Constructs an array of geometries.</li><li class="listitem"><a class="link" href="ST_AddBBox.html" title="ST_AddBBox">ST_AddBBox</a> - Add bounding box to the geometry.</li><li class="listitem"><a class="link" href="ST_Affine.html" title="ST_Affine">ST_Affine</a> - Applies a 3d affine transformation to the geometry to do things like translate, rotate, scale in one step.</li><li class="listitem"><a class="link" href="ST_AsEWKB.html" title="ST_AsEWKB">ST_AsEWKB</a> - Return the Well-Known Binary (WKB) representation of the geometry with SRID meta data.</li><li class="listitem"><a class="link" href="ST_AsEWKT.html" title="ST_AsEWKT">ST_AsEWKT</a> - Return the Well-Known Text (WKT) representation of the geometry with SRID meta data.</li><li class="listitem"><a class="link" href="ST_AsHEXEWKB.html" title="ST_AsHEXEWKB">ST_AsHEXEWKB</a> - Returns a Geometry in HEXEWKB format (as text) using either little-endian (NDR) or big-endian (XDR) encoding.</li><li class="listitem"><a class="link" href="ST_AsText.html" title="ST_AsText">ST_AsText</a> - Return the Well-Known Text (WKT) representation of the geometry without SRID metadata.</li><li class="listitem"><a class="link" href="ST_Box2D.html" title="ST_Box2D">ST_Box2D</a> - Returns a BOX2D representing the maximum extents of the geometry.</li><li class="listitem"><a class="link" href="ST_Box3D.html" title="ST_Box3D">ST_Box3D</a> - Returns a BOX3D representing the maximum extents of the geometry.</li><li class="listitem"><a class="link" href="ST_Collect.html" title="ST_Collect">ST_Collect</a> - Return a specified ST_Geometry value from a collection of other geometries.</li><li class="listitem"><a class="link" href="ST_CoordDim.html" title="ST_CoordDim">ST_CoordDim</a> - Return the coordinate dimension of the ST_Geometry value.</li><li class="listitem"><a class="link" href="ST_CurveToLine.html" title="ST_CurveToLine">ST_CurveToLine</a> - Converts a CIRCULARSTRING/CURVEDPOLYGON to a LINESTRING/POLYGON</li><li class="listitem"><a class="link" href="ST_DropBBox.html" title="ST_DropBBox">ST_DropBBox</a> - Drop the bounding box cache from the geometry.</li><li class="listitem"><a class="link" href="ST_Dump.html" title="ST_Dump">ST_Dump</a> - Returns a set of geometry_dump (geom,path) rows, that make up a geometry g1.</li><li class="listitem"><a class="link" href="ST_Estimated_Extent.html" title="ST_Estimated_Extent">ST_Estimated_Extent</a> - Return the 'estimated' extent of the given spatial table. The estimated is taken from the geometry column's statistics. The current schema will be used if not specified.</li><li class="listitem"><a class="link" href="ST_Extent3D.html" title="ST_Extent3D">ST_Extent3D</a> - an aggregate function that returns the box3D bounding box that bounds rows of geometries.</li><li class="listitem"><a class="link" href="ST_Force_2D.html" title="ST_Force_2D">ST_Force_2D</a> - Forces the geometries into a "2-dimensional mode" so that all output representations will only have the X and Y coordinates.</li><li class="listitem"><a class="link" href="ST_Force_3D.html" title="ST_Force_3D">ST_Force_3D</a> - Forces the geometries into XYZ mode. This is an alias for ST_Force_3DZ.</li><li class="listitem"><a class="link" href="ST_Force_3DM.html" title="ST_Force_3DM">ST_Force_3DM</a> - Forces the geometries into XYM mode.</li><li class="listitem"><a class="link" href="ST_Force_3DZ.html" title="ST_Force_3DZ">ST_Force_3DZ</a> - Forces the geometries into XYZ mode. This is a synonym for ST_Force_3D.</li><li class="listitem"><a class="link" href="ST_Force_4D.html" title="ST_Force_4D">ST_Force_4D</a> - Forces the geometries into XYZM mode.</li><li class="listitem"><a class="link" href="ST_Force_Collection.html" title="ST_Force_Collection">ST_Force_Collection</a> - Converts the geometry into a GEOMETRYCOLLECTION.</li><li class="listitem"><a class="link" href="ST_GeoHash.html" title="ST_GeoHash">ST_GeoHash</a> - Return a GeoHash representation (geohash.org) of the geometry.</li><li class="listitem"><a class="link" href="ST_GeomFromEWKB.html" title="ST_GeomFromEWKB">ST_GeomFromEWKB</a> - Return a specified ST_Geometry value from Extended Well-Known Binary representation (EWKB).</li><li class="listitem"><a class="link" href="ST_GeomFromEWKT.html" title="ST_GeomFromEWKT">ST_GeomFromEWKT</a> - Return a specified ST_Geometry value from Extended Well-Known Text representation (EWKT).</li><li class="listitem"><a class="link" href="ST_GeomFromText.html" title="ST_GeomFromText">ST_GeomFromText</a> - Return a specified ST_Geometry value from Well-Known Text representation (WKT).</li><li class="listitem"><a class="link" href="ST_GeomFromWKB.html" title="ST_GeomFromWKB">ST_GeomFromWKB</a> - Creates a geometry instance from a Well-Known Binary geometry representation (WKB) and optional SRID.</li><li class="listitem"><a class="link" href="ST_GeometryN.html" title="ST_GeometryN">ST_GeometryN</a> - Return the 1-based Nth geometry if the geometry is a GEOMETRYCOLLECTION, MULTIPOINT, MULTILINESTRING, MULTICURVE or MULTIPOLYGON. Otherwise, return NULL.</li><li class="listitem"><a class="link" href="ST_HasArc.html" title="ST_HasArc">ST_HasArc</a> - Returns true if a geometry or geometry collection contains a circular string</li><li class="listitem"><a class="link" href="ST_HasBBox.html" title="ST_HasBBox">ST_HasBBox</a> - Returns TRUE if the bbox of this geometry is cached, FALSE otherwise.</li><li class="listitem"><a class="link" href="ST_IsClosed.html" title="ST_IsClosed">ST_IsClosed</a> - Returns TRUE if the LINESTRING's start and end points are coincident.</li><li class="listitem"><a class="link" href="ST_IsEmpty.html" title="ST_IsEmpty">ST_IsEmpty</a> - Returns true if this Geometry is an empty geometry . If true, then this Geometry represents the empty point set - i.e. GEOMETRYCOLLECTION(EMPTY).</li><li class="listitem"><a class="link" href="ST_LineToCurve.html" title="ST_LineToCurve">ST_LineToCurve</a> - Converts a LINESTRING/POLYGON to a CIRCULARSTRING, CURVED POLYGON</li><li class="listitem"><a class="link" href="ST_Mem_Size.html" title="ST_Mem_Size">ST_Mem_Size</a> - Returns the amount of space (in bytes) the geometry takes.</li><li class="listitem"><a class="link" href="ST_NPoints.html" title="ST_NPoints">ST_NPoints</a> - Return the number of points (vertexes) in a geometry.</li><li class="listitem"><a class="link" href="ST_NRings.html" title="ST_NRings">ST_NRings</a> - If the geometry is a polygon or multi-polygon returns the number of rings.</li><li class="listitem"><a class="link" href="ST_PointFromWKB.html" title="ST_PointFromWKB">ST_PointFromWKB</a> - Makes a geometry from WKB with the given SRID</li><li class="listitem"><a class="link" href="ST_PointN.html" title="ST_PointN">ST_PointN</a> - Return the Nth point in the first linestring or circular linestring in the geometry. Return NULL if there is no linestring in the geometry.</li><li class="listitem"><a class="link" href="ST_Rotate.html" title="ST_Rotate">ST_Rotate</a> - This is a synonym for ST_RotateZ</li><li class="listitem"><a class="link" href="ST_RotateZ.html" title="ST_RotateZ">ST_RotateZ</a> - Rotate a geometry rotRadians about the Z axis.</li><li class="listitem"><a class="link" href="ST_SRID.html" title="ST_SRID">ST_SRID</a> - Returns the spatial reference identifier for the ST_Geometry as defined in spatial_ref_sys table.</li><li class="listitem"><a class="link" href="ST_Scale.html" title="ST_Scale">ST_Scale</a> - Scales the geometry to a new size by multiplying the ordinates with the parameters. Ie: ST_Scale(geom, Xfactor, Yfactor, Zfactor).</li><li class="listitem"><a class="link" href="ST_SetSRID.html" title="ST_SetSRID">ST_SetSRID</a> - Sets the SRID on a geometry to a particular integer value.</li><li class="listitem"><a class="link" href="ST_TransScale.html" title="ST_TransScale">ST_TransScale</a> - Translates the geometry using the deltaX and deltaY args, then scales it using the XFactor, YFactor args, working in 2D only.</li><li class="listitem"><a class="link" href="ST_Transform.html" title="ST_Transform">ST_Transform</a> - Returns a new geometry with its coordinates transformed to the SRID referenced by the integer parameter.</li><li class="listitem"><a class="link" href="ST_Translate.html" title="ST_Translate">ST_Translate</a> - Translates the geometry to a new location using the numeric parameters as offsets. Ie: ST_Translate(geom, X, Y) or ST_Translate(geom, X, Y,Z).</li><li class="listitem"><a class="link" href="ST_XMax.html" title="ST_XMax">ST_XMax</a> - Returns X maxima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_XMin.html" title="ST_XMin">ST_XMin</a> - Returns X minima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_YMax.html" title="ST_YMax">ST_YMax</a> - Returns Y maxima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_YMin.html" title="ST_YMin">ST_YMin</a> - Returns Y minima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_ZMax.html" title="ST_ZMax">ST_ZMax</a> - Returns Z minima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_ZMin.html" title="ST_ZMin">ST_ZMin</a> - Returns Z minima of a bounding box 2d or 3d or a geometry.</li><li class="listitem"><a class="link" href="ST_Zmflag.html" title="ST_Zmflag">ST_Zmflag</a> - Returns ZM (dimension semantic) flag of the geometries as a small int. Values are: 0=2d, 1=3dm, 2=3dz, 3=4d.</li><li class="listitem"><a class="link" href="UpdateGeometrySRID.html" title="UpdateGeometrySRID">UpdateGeometrySRID</a> - Updates the SRID of all features in a geometry column, geometry_columns metadata and srid table constraint</li></ul></div></div><div class="sect1" title="8.5. New PostGIS Functions"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NewFunctions"></a>8.5. New PostGIS Functions</h2></div></div></div><div class="toc"><dl><dt><span class="sect2"><a href="ch08.html#NewFunctions_1_4">8.5.1. PostGIS Functions new in 1.4</a></span></dt><dt><span class="sect2"><a href="ch08.html#NewFunctions_1_3">8.5.2. PostGIS Functions new in 1.3</a></span></dt></dl></div><div class="sect2" title="8.5.1. PostGIS Functions new in 1.4"><div class="titlepage"><div><div><h3 class="title"><a name="NewFunctions_1_4"></a>8.5.1. PostGIS Functions new in 1.4</h3></div></div></div><p>The functions given below are PostGIS functions that were introduced or enhanced in the 1.4 release.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><a class="link" href="Populate_Geometry_Columns.html" title="Populate_Geometry_Columns">Populate_Geometry_Columns</a> - Ensures geometry columns have appropriate spatial constraints and exist in the geometry_columns table. Availability: 1.4.0</li><li class="listitem"><a class="link" href="ST_AsSVG.html" title="ST_AsSVG">ST_AsSVG</a> - Returns a Geometry in SVG path data. 
+		  Availability: 1.2.2.  Availability: 1.4.0  Changed in PostGIS 1.4.0 to include L command in absolute path to conform to http://www.w3.org/TR/SVG/paths.html#PathDataBNF 
+		</li><li class="listitem"><a class="link" href="ST_Collect.html" title="ST_Collect">ST_Collect</a> - Return a specified ST_Geometry value from a collection of other geometries. Availability: 1.4.0 -  ST_Collect(geomarray) was introduced. ST_Collect was enhanced to handle more geometries faster.</li><li class="listitem"><a class="link" href="ST_ContainsProperly.html" title="ST_ContainsProperly">ST_ContainsProperly</a> - Returns true if B intersects the interior of A but not the boundary (or exterior). A does not contain properly itself, but does contain itself. Availability: 1.4.0 - requires GEOS &gt;= 3.1.0.</li><li class="listitem"><a class="link" href="ST_Extent.html" title="ST_Extent">ST_Extent</a> - an aggregate function that returns the bounding box that bounds rows of geometries. 
+		  Availability: 1.4.0 As of 1.4.0 now returns a box3d_extent instead of box2d object.
+		</li><li class="listitem"><a class="link" href="ST_GeoHash.html" title="ST_GeoHash">ST_GeoHash</a> - Return a GeoHash representation (geohash.org) of the geometry. Availability: 1.4.0</li><li class="listitem"><a class="link" href="ST_IsValidReason.html" title="ST_IsValidReason">ST_IsValidReason</a> - Returns text stating if a geometry is valid or not and if not valid, a reason why. Availability: 1.4 - requires GEOS &gt;= 3.1.0.</li><li class="listitem"><a class="link" href="ST_LineCrossingDirection.html" title="ST_LineCrossingDirection">ST_LineCrossingDirection</a> - Given 2 linestrings, returns a number between -3 and 3 denoting what kind of crossing behavior. 0 is no crossing. Availability: 1.4</li><li class="listitem"><a class="link" href="ST_LocateBetweenElevations.html" title="ST_LocateBetweenElevations">ST_LocateBetweenElevations</a> - Return a derived geometry (collection) value with elements that intersect the specified range of elevations inclusively. Only 3D, 4D LINESTRINGS and MULTILINESTRINGS are supported. Availability: 1.4.0</li><li class="listitem"><a class="link" href="ST_MakeLine.html" title="ST_MakeLine">ST_MakeLine</a> - Creates a Linestring from point geometries. Availability: 1.4.0 -  ST_MakeLine(geomarray) was introduced. ST_MakeLine aggregate functions was enhanced to handle more points faster.</li><li class="listitem"><a class="link" href="ST_MinimumBoundingCircle.html" title="ST_MinimumBoundingCircle">ST_MinimumBoundingCircle</a> - Returns the smallest circle polygon that can fully contain a geometry. Default uses 48 segments per quarter circle. Availability: 1.4.0 - requires GEOS</li><li class="listitem"><a class="link" href="ST_Union.html" title="ST_Union">ST_Union</a> - Returns a geometry that represents the point set union of the Geometries. Availability: 1.4.0 - ST_Union was enhanced. ST_Union(geomarray) was introduced and also faster aggregate collection in PostgreSQL.  If you are using GEOS 3.1.0+
+		ST_Union will use the faster Cascaded Union algorithm described in
+		http://blog.cleverelephant.ca/2009/01/must-faster-unions-in-postgis-14.html</li></ul></div></div><div class="sect2" title="8.5.2. PostGIS Functions new in 1.3"><div class="titlepage"><div><div><h3 class="title"><a name="NewFunctions_1_3"></a>8.5.2. PostGIS Functions new in 1.3</h3></div></div></div><p>The functions given below are PostGIS functions that were introduced in the 1.3 release.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><a class="link" href="ST_AsGeoJSON.html" title="ST_AsGeoJSON">ST_AsGeoJSON</a> - Return the geometry as a GeoJSON element. Availability: 1.3.4</li><li class="listitem"><a class="link" href="ST_SimplifyPreserveTopology.html" title="ST_SimplifyPreserveTopology">ST_SimplifyPreserveTopology</a> - Returns a "simplified" version of the given geometry using the Douglas-Peuker algorithm. Will avoid creating derived geometries (polygons in particular) that are invalid. Availability: 1.3.3</li></ul></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ST_HasBBox.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch09.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">ST_HasBBox </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 9. Reporting Problems</td></tr></table></div></body></html>

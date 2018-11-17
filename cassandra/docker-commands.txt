@@ -1,0 +1,19 @@
+<!-- Step 1: Create a network -->
+docker network create app-tier --driver bridge
+
+<!-- Step 2: Launch the Cassandra server instance -->
+<!-- Use the --network app-tier argument to the docker run command to attach the Cassandra container to the app-tier network.
+ -->
+docker run -d --name cassandra-server \
+    --network app-tier \
+    bitnami/cassandra:latest
+
+<!-- Step 3: Launch your Cassandra client instance -->
+<!-- Finally we create a new container instance to launch the Cassandra client and connect to the server created in the previous step:
+ -->
+docker run -it --rm \
+    --network app-tier \
+    bitnami/cassandra:latest cqlsh --username cassandra --password cassandra cassandra-server
+
+docker run --name pyy -it -v $(pwd)/python_data:/ data python:3.6.5 bash
+

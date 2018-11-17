@@ -1,0 +1,95 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 3. Frequently Asked Questions</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="PostGIS 1.4 Manual"><link rel="up" href="index.html" title="PostGIS 1.4 Manual"><link rel="prev" href="ch02.html" title="Chapter 2. Installation"><link rel="next" href="ch04.html" title="Chapter 4. Using PostGIS: Data Management and Queries"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 3. Frequently Asked Questions</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch04.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter 3. Frequently Asked Questions"><div class="titlepage"><div><div><h2 class="title"><a name="id417411"></a>Chapter 3. Frequently Asked Questions</h2></div></div></div><div class="qandaset" title="Frequently Asked Questions"><a name="id417417"></a><dl><dt>3.1. <a href="ch03.html#id417099">What kind of geometric objects can I store?</a></dt><dt>3.2. <a href="ch03.html#id417117">How do I insert a GIS object into the database?</a></dt><dt>3.3. <a href="ch03.html#id417485">How do I construct a spatial query?</a></dt><dt>3.4. <a href="ch03.html#id417532">How do I speed up spatial queries on large tables?</a></dt><dt>3.5. <a href="ch03.html#id417599">Why aren't PostgreSQL R-Tree indexes supported?</a></dt><dt>3.6. <a href="ch03.html#id417642">Why should I use the AddGeometryColumn()
+        function and all the other OpenGIS stuff?</a></dt><dt>3.7. <a href="ch03.html#id417680">What is the best way to find all objects within a radius of
+        another object?</a></dt><dt>3.8. <a href="ch03.html#id417718">How do I perform a coordinate reprojection as part of a
+        query?</a></dt><dt>3.9. <a href="ch03.html#id417744">I did an ST_AsEWKT and ST_AsText on my rather large geometry and it returned blank field.  What gives?</a></dt><dt>3.10. <a href="ch03.html#id417769">When I do an ST_Intersects, it says my two geometries don't intersect when I KNOW THEY DO. What gives?</a></dt></dl><table border="0" width="100%" summary="Q and A Set"><col align="left" width="1%"><col><tbody><tr class="question" title="3.1."><td align="left" valign="top"><a name="id417099"></a><a name="id417101"></a><p><b>3.1.</b></p></td><td align="left" valign="top"><p>What kind of geometric objects can I store?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>You can store point, line, polygon, multipoint, multiline,
+        multipolygon, and geometrycollections. These are specified in the Open
+        GIS Well Known Text Format (with XYZ,XYM,XYZM extensions).</p></td></tr><tr class="question" title="3.2."><td align="left" valign="top"><a name="id417117"></a><a name="id417119"></a><p><b>3.2.</b></p></td><td align="left" valign="top"><p>How do I insert a GIS object into the database?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>First, you need to create a table with a column of type
+        "geometry" to hold your GIS data. Connect to your database with
+        <code class="filename">psql</code> and try the following SQL:</p><pre class="programlisting">CREATE TABLE gtest ( ID int4, NAME varchar(20) );
+SELECT AddGeometryColumn('', 'gtest','geom',-1,'LINESTRING',2);</pre><p>If the geometry column addition fails, you probably have not
+        loaded the PostGIS functions and objects into this database. See the
+        <a class="link" href="ch02.html#PGInstall" title="2.4. Installation">installation instructions</a>.</p><p>Then, you can insert a geometry into the table using a SQL
+        insert statement. The GIS object itself is formatted using the OpenGIS
+        Consortium "well-known text" format:</p><pre class="programlisting">INSERT INTO gtest (ID, NAME, GEOM) 
+VALUES (
+  1, 
+  'First Geometry', 
+  ST_GeomFromText('LINESTRING(2 3,4 5,6 5,7 8)', -1)
+);</pre><p>For more information about other GIS objects, see the <a class="link" href="ch04.html#RefObject" title="4.1. GIS Objects">object reference</a>.</p><p>To view your GIS data in the table:</p><pre class="programlisting">SELECT id, name, ST_AsText(geom) AS geom FROM gtest;</pre><p>The return value should look something like this:</p><pre class="programlisting"> id | name           | geom
+----+----------------+-----------------------------
+  1 | First Geometry | LINESTRING(2 3,4 5,6 5,7 8) 
+(1 row)</pre></td></tr><tr class="question" title="3.3."><td align="left" valign="top"><a name="id417485"></a><a name="id417488"></a><p><b>3.3.</b></p></td><td align="left" valign="top"><p>How do I construct a spatial query?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>The same way you construct any other database query, as an SQL
+        combination of return values, functions, and boolean tests.</p><p>For spatial queries, there are two issues that are important to
+        keep in mind while constructing your query: is there a spatial index
+        you can make use of; and, are you doing expensive calculations on a
+        large number of geometries.</p><p>In general, you will want to use the "intersects operator"
+        (&amp;&amp;) which tests whether the bounding boxes of features
+        intersect. The reason the &amp;&amp; operator is useful is because if
+        a spatial index is available to speed up the test, the &amp;&amp;
+        operator will make use of this. This can make queries much much
+        faster.</p><p>You will also make use of spatial functions, such as Distance(),
+        ST_Intersects(), ST_Contains() and ST_Within(), among others, to
+        narrow down the results of your search. Most spatial queries include
+        both an indexed test and a spatial function test. The index test
+        serves to limit the number of return tuples to only tuples that
+        <span class="emphasis"><em>might</em></span> meet the condition of interest. The spatial
+        functions are then use to test the condition exactly.</p><pre class="programlisting">SELECT id, the_geom 
+FROM thetable 
+WHERE 
+  ST_Contains(the_geom,'POLYGON((0 0, 0 10, 10 10, 10 0, 0 0))');</pre></td></tr><tr class="question" title="3.4."><td align="left" valign="top"><a name="id417532"></a><a name="id417534"></a><p><b>3.4.</b></p></td><td align="left" valign="top"><p>How do I speed up spatial queries on large tables?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>Fast queries on large tables is the <span class="emphasis"><em>raison
+        d'etre</em></span> of spatial databases (along with transaction
+        support) so having a good index is important.</p><p>To build a spatial index on a table with a
+        <code class="varname">geometry</code> column, use the "CREATE INDEX" function as
+        follows:</p><pre class="programlisting">CREATE INDEX [indexname] ON [tablename] USING GIST ( [geometrycolumn] );</pre><p>The "USING GIST" option tells the server to use a GiST
+        (Generalized Search Tree) index.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png"></td><th align="left"></th></tr><tr><td align="left" valign="top"><p>GiST indexes are assumed to be lossy. Lossy indexes uses a
+          proxy object (in the spatial case, a bounding box) for building the
+          index.</p></td></tr></table></div><p>You should also ensure that the PostgreSQL query planner has
+        enough information about your index to make rational decisions about
+        when to use it. To do this, you have to "gather statistics" on your
+        geometry tables.</p><p>For PostgreSQL 8.0.x and greater, just run the <span class="command"><strong>VACUUM
+        ANALYZE</strong></span> command.</p><p>For PostgreSQL 7.4.x and below, run the <span class="command"><strong>SELECT
+        UPDATE_GEOMETRY_STATS()</strong></span> command.</p></td></tr><tr class="question" title="3.5."><td align="left" valign="top"><a name="id417599"></a><a name="id417601"></a><p><b>3.5.</b></p></td><td align="left" valign="top"><p>Why aren't PostgreSQL R-Tree indexes supported?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>Early versions of PostGIS used the PostgreSQL R-Tree indexes.
+        However, PostgreSQL R-Trees have been completely discarded since
+        version 0.6, and spatial indexing is provided with an R-Tree-over-GiST
+        scheme.</p><p>Our tests have shown search speed for native R-Tree and GiST to
+        be comparable. Native PostgreSQL R-Trees have two limitations which
+        make them undesirable for use with GIS features (note that these
+        limitations are due to the current PostgreSQL native R-Tree
+        implementation, not the R-Tree concept in general):</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>R-Tree indexes in PostgreSQL cannot handle features which
+            are larger than 8K in size. GiST indexes can, using the "lossy"
+            trick of substituting the bounding box for the feature
+            itself.</p></li><li class="listitem"><p>R-Tree indexes in PostgreSQL are not "null safe", so
+            building an index on a geometry column which contains null
+            geometries will fail.</p></li></ul></div></td></tr><tr class="question" title="3.6."><td align="left" valign="top"><a name="id417642"></a><a name="id417644"></a><p><b>3.6.</b></p></td><td align="left" valign="top"><p>Why should I use the <code class="varname">AddGeometryColumn()</code>
+        function and all the other OpenGIS stuff?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>If you do not want to use the OpenGIS support functions, you do
+        not have to. Simply create tables as in older versions, defining your
+        geometry columns in the CREATE statement. All your geometries will
+        have SRIDs of -1, and the OpenGIS meta-data tables will
+        <span class="emphasis"><em>not</em></span> be filled in properly. However, this will
+        cause most applications based on PostGIS to fail, and it is generally
+        suggested that you do use <code class="varname">AddGeometryColumn()</code> to
+        create geometry tables.</p><p>MapServer is one application which makes use of the
+        <code class="varname">geometry_columns</code> meta-data. Specifically, MapServer
+        can use the SRID of the geometry column to do on-the-fly reprojection
+        of features into the correct map projection.</p></td></tr><tr class="question" title="3.7."><td align="left" valign="top"><a name="id417680"></a><a name="id417682"></a><p><b>3.7.</b></p></td><td align="left" valign="top"><p>What is the best way to find all objects within a radius of
+        another object?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>To use the database most efficiently, it is best to do radius
+        queries which combine the radius test with a bounding box test: the
+        bounding box test uses the spatial index, giving fast access to a
+        subset of data which the radius test is then applied to.</p><p>The <code class="varname">ST_DWithin(geometry, geometry, distance)</code>
+        function is a handy way of performing an indexed distance search. It
+        works by creating a search rectangle large enough to enclose the
+        distance radius, then performing an exact distance search on the
+        indexed subset of results.</p><p>For example, to find all objects with 100 meters of POINT(1000
+        1000) the following query would work well:</p><pre class="programlisting">SELECT * FROM geotable 
+WHERE ST_DWithin(geocolumn, 'POINT(1000 1000)', 100.0);</pre></td></tr><tr class="question" title="3.8."><td align="left" valign="top"><a name="id417718"></a><a name="id417721"></a><p><b>3.8.</b></p></td><td align="left" valign="top"><p>How do I perform a coordinate reprojection as part of a
+        query?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>To perform a reprojection, both the source and destination
+        coordinate systems must be defined in the SPATIAL_REF_SYS table, and
+        the geometries being reprojected must already have an SRID set on
+        them. Once that is done, a reprojection is as simple as referring to
+        the desired destination SRID. The below projects a geometry to NAD 83 long lat.  
+		The below will only work if the srid of the_geom is not -1 (not undefined spatial ref)</p><pre class="programlisting">SELECT ST_Transform(the_geom,4269) FROM geotable;</pre></td></tr><tr class="question" title="3.9."><td align="left" valign="top"><a name="id417744"></a><a name="id417746"></a><p><b>3.9.</b></p></td><td align="left" valign="top"><p>I did an ST_AsEWKT and ST_AsText on my rather large geometry and it returned blank field.  What gives?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>You are probably using PgAdmin or some other tool that doesn't output large text.  If your geometry is big
+			enough, it will appear blank in these tools. Use PSQL if you really need to see it or output it in WKT.</p><pre class="programlisting">
+				--To check number of geometries are really blank
+				SELECT count(gid) FROM geotable WHERE the_geom IS NULL;</pre></td></tr><tr class="question" title="3.10."><td align="left" valign="top"><a name="id417769"></a><a name="id417772"></a><p><b>3.10.</b></p></td><td align="left" valign="top"><p>When I do an ST_Intersects, it says my two geometries don't intersect when I KNOW THEY DO. What gives?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>This generally happens in two common cases.  Your geometry is invalid -- check <a class="xref" href="ST_IsValid.html" title="ST_IsValid">ST_IsValid</a>
+			or you are assuming they intersect because ST_AsText truncates the numbers and you have lots of decimals after 
+				it is not showing you.</p></td></tr></tbody></table></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 2. Installation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 4. Using PostGIS: Data Management and Queries</td></tr></table></div></body></html>

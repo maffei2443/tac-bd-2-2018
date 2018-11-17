@@ -1,0 +1,1 @@
+SELECT AddGeometryColumn( <tabela>, <column_name>, 4291, 'LINESTRING', 2 )
