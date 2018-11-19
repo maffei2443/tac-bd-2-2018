@@ -1,0 +1,44 @@
+--2018-11-17 18:33:34--  https://www.thelancet.com/action/showPdf?pii=S0140-6736%2813%2960715-1
+Resolving www.thelancet.com (www.thelancet.com)... 65.156.1.100
+Connecting to www.thelancet.com (www.thelancet.com)|65.156.1.100|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?redirect=https%3A%2F%2Fwww.thelancet.com%2Faction%2FshowPdf%3Fpii%3DS0140-6736%252813%252960715-1&rc=0 [following]
+--2018-11-17 18:33:35--  https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?redirect=https%3A%2F%2Fwww.thelancet.com%2Faction%2FshowPdf%3Fpii%3DS0140-6736%252813%252960715-1&rc=0
+Resolving secure.jbs.elsevierhealth.com (secure.jbs.elsevierhealth.com)... 65.156.1.100
+Connecting to secure.jbs.elsevierhealth.com (secure.jbs.elsevierhealth.com)|65.156.1.100|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=1&redirect=https%3A%2F%2Fwww.thelancet.com%2Faction%2FshowPdf%3Fpii%3DS0140-6736%252813%252960715-1 [following]
+--2018-11-17 18:33:42--  https://secure.jbs.elsevierhealth.com/action/getSharedSiteSession?rc=1&redirect=https%3A%2F%2Fwww.thelancet.com%2Faction%2FshowPdf%3Fpii%3DS0140-6736%252813%252960715-1
+Connecting to secure.jbs.elsevierhealth.com (secure.jbs.elsevierhealth.com)|65.156.1.100|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://id.elsevier.com/ACW/?return=https%3A%2F%2Fsecure.jbs.elsevierhealth.com%2Faction%2FconsumeSsoCookie%3FredirectUri%3Dhttps%253A%252F%252Fwww.thelancet.com%252Faction%252FconsumeSharedSessionAction%253FJSESSIONID%253DaaaqA1gCWoRdoaz33pqCw%2526MAID%253DCfUPpwkO8TeO48jFpS8PoA%25253D%25253D%2526SERVER%253DWZ6myaEXBLGIX%25252BcCjhpT2A%25253D%25253D%2526ORIGIN%253D657749052%2526RD%253DRD%26code%3Dnull [following]
+--2018-11-17 18:33:43--  https://id.elsevier.com/ACW/?return=https%3A%2F%2Fsecure.jbs.elsevierhealth.com%2Faction%2FconsumeSsoCookie%3FredirectUri%3Dhttps%253A%252F%252Fwww.thelancet.com%252Faction%252FconsumeSharedSessionAction%253FJSESSIONID%253DaaaqA1gCWoRdoaz33pqCw%2526MAID%253DCfUPpwkO8TeO48jFpS8PoA%25253D%25253D%2526SERVER%253DWZ6myaEXBLGIX%25252BcCjhpT2A%25253D%25253D%2526ORIGIN%253D657749052%2526RD%253DRD%26code%3Dnull
+Resolving id.elsevier.com (id.elsevier.com)... 104.16.131.230, 104.16.130.230
+Connecting to id.elsevier.com (id.elsevier.com)|104.16.131.230|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://secure.jbs.elsevierhealth.com/action/consumeSsoCookie?redirectUri=https%3A%2F%2Fwww.thelancet.com%2Faction%2FconsumeSharedSessionAction%3FJSESSIONID%3DaaaqA1gCWoRdoaz33pqCw%26MAID%3DCfUPpwkO8TeO48jFpS8PoA%253D%253D%26SERVER%3DWZ6myaEXBLGIX%252BcCjhpT2A%253D%253D%26ORIGIN%3D657749052%26RD%3DRD&code=null&acw=&utt= [following]
+--2018-11-17 18:33:44--  https://secure.jbs.elsevierhealth.com/action/consumeSsoCookie?redirectUri=https%3A%2F%2Fwww.thelancet.com%2Faction%2FconsumeSharedSessionAction%3FJSESSIONID%3DaaaqA1gCWoRdoaz33pqCw%26MAID%3DCfUPpwkO8TeO48jFpS8PoA%253D%253D%26SERVER%3DWZ6myaEXBLGIX%252BcCjhpT2A%253D%253D%26ORIGIN%3D657749052%26RD%3DRD&code=null&acw=&utt=
+Connecting to secure.jbs.elsevierhealth.com (secure.jbs.elsevierhealth.com)|65.156.1.100|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www.thelancet.com/action/consumeSharedSessionAction?JSESSIONID=aaaqA1gCWoRdoaz33pqCw&MAID=CfUPpwkO8TeO48jFpS8PoA%3D%3D&SERVER=WZ6myaEXBLGIX%2BcCjhpT2A%3D%3D&ORIGIN=657749052&RD=RD [following]
+--2018-11-17 18:33:46--  https://www.thelancet.com/action/consumeSharedSessionAction?JSESSIONID=aaaqA1gCWoRdoaz33pqCw&MAID=CfUPpwkO8TeO48jFpS8PoA%3D%3D&SERVER=WZ6myaEXBLGIX%2BcCjhpT2A%3D%3D&ORIGIN=657749052&RD=RD
+Connecting to www.thelancet.com (www.thelancet.com)|65.156.1.100|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www.thelancet.com/action/consumeSharedSessionAction?JSESSIONID=aaaqA1gCWoRdoaz33pqCw&MAID=CfUPpwkO8TeO48jFpS8PoA%3D%3D&SERVER=WZ6myaEXBLGIX%2BcCjhpT2A%3D%3D&ORIGIN=657749052&RD=RD&rtc=0 [following]
+--2018-11-17 18:33:46--  https://www.thelancet.com/action/consumeSharedSessionAction?JSESSIONID=aaaqA1gCWoRdoaz33pqCw&MAID=CfUPpwkO8TeO48jFpS8PoA%3D%3D&SERVER=WZ6myaEXBLGIX%2BcCjhpT2A%3D%3D&ORIGIN=657749052&RD=RD&rtc=0
+Connecting to www.thelancet.com (www.thelancet.com)|65.156.1.100|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www.thelancet.com/action/showPdf?pii=S0140-6736%2813%2960715-1 [following]
+--2018-11-17 18:33:49--  https://www.thelancet.com/action/showPdf?pii=S0140-6736%2813%2960715-1
+Connecting to www.thelancet.com (www.thelancet.com)|65.156.1.100|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 183467 (179K) [application/pdf]
+Saving to: ‘EffectOfAConditionalCashTransferProgrammeOnChildhoodMortality.pdf’
+
+     0K .......... .......... .......... .......... .......... 27%  112K 1s
+    50K .......... .......... .......... .......... .......... 55% 83,5K 1s
+   100K .......... .......... .......... .......... .......... 83% 56,2K 0s
+   150K .......... .......... .........                       100% 69,2K=2,4s
+
+2018-11-17 18:33:52 (76,1 KB/s) - ‘EffectOfAConditionalCashTransferProgrammeOnChildhoodMortality.pdf’ saved [183467/183467]
+

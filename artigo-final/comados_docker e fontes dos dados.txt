@@ -1,0 +1,35 @@
+-- inicia um container, com o serviço cassandra em background e mapeando a pasta ./teste, onde devem estar os arquivos a serem importados
+sudo docker run --name cassandraN3 -d -v $(pwd)/teste:/teste cassandra:3.11
+
+-- acessa o bash do container em execução para acessar o cqlsh
+sudo docker container exec -it cassandraN3 /bin/bash
+
+-- cria o keyspace
+CREATE KEYSPACE myspace
+           WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 1};
+
+-- cria a tabela
+CREATE TABLE pessoas (
+    codigo int PRIMARY KEY,
+    nome text,
+    idade int);
+
+
+-- copia os dados do arquivo csv para a tabela - observar a ordem das colunas
+COPY myspace.pessoas FROM './teste/pessoas.csv' WITH DELIMITER=';' AND HEADER=TRUE;
+
+
+*--------------------------------------------------------------------------------
+
+Fontes de dados
+================
+Dados do IDH:http://dados.gov.br/dataset/idhm-indice-de-desenvolvimento-humano
+alternativa: http://www.atlasbrasil.org.br/2013/pt/consulta/
+
+Dados de mortalidade infantil: http://www2.datasus.gov.br/DATASUS/index.php?area=0205&id=6937
+
+Dados do bolsa família: http://dados.gov.br/dataset/bolsa-familia-misocial
+alternativa: http://www.portaltransparencia.gov.br/download-de-dados/bolsa-familia-pagamentos (a partir de 2013 - mês a mês)
+
+
+
